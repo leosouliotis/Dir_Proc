@@ -9,7 +9,7 @@ Dirichlet process collapsed Gibbs for infinite Gaussian mixtures
   * Clustering
   * ArgParse
 
-More information on how to install Julia in your machine can be found [here](https://julialang.org/downloads/)
+More information on how to install Julia in your machine can be found [here](https://julialang.org/downloads/).
 The prerequisite packages can be downloaded the following way:
 
   ```julia
