@@ -1,3 +1,5 @@
+#!/usr/bin/env julia
+
 using DataFrames
 using Distributions
 using StatsFuns
