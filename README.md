@@ -37,3 +37,5 @@ where
   * -d : Dataset of interest (N x d)
   * -i : Number of iteration for the Gibbs sampler
   * -k : Initial number of clusters
+
+The results of the clustering are saved in a .csv file named DP_clustering.csv
