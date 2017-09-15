@@ -12,12 +12,10 @@ function parse_commandline()
   @add_arg_table s begin
     "--opt1" ,"-d"
       help = "A CSV file containing youd data"
-    "--opt2", "-o"
-      help = "True Cluster Allocation"
-    "--opt3", "-k"
+    "--opt2", "-k"
       arg_type = Int
       help = "Starting number of clusters"
-    "--opt4", "-i"
+    "--opt3", "-i"
       arg_type = Int
       help = "No of Iterations"
   end
@@ -28,18 +26,8 @@ end
 parsed_args = parse_commandline()
 data = readtable(parsed_args["opt1"],header = true)
 data = sort(data,cols=:contig_id)
-contigs= data[:,2]
-data = delete!(data, :1)
-data = delete!(data, :1)
 N,d = size(data)
-
-# Import and sort trur cluster allocation
-tga=readtable(parsed_args["opt2"],header = true)
-rga = sort(tga,cols=:clustering_species_1_)
-println(rga)
-rga=tga[:,3]
 println("Data imported")
-
 
 # Multivariate t distribution density calulation
 function dmvtp(x, mu, Sigma, df)
@@ -61,7 +49,7 @@ X = Matrix(data)
 α = 1
 
 # Initialization
-K = Int(parsed_args["opt3"])
+K = Int(parsed_args["opt2"])
 label = kmeans(transpose(X),K,maxiter=1000, tol=0.00001).assignments
 println("Initial ARI:")
 println(randindex(rga,label)[1])
@@ -70,9 +58,7 @@ prob = zeros(Float64,K+1);
 println("Gibbs sampler initialized and  starting...")
 
 # Run Gibbs Sampler
-rand_prev = rand_diff = 1
-#iter = 1
-#while abs(rand_diff) > 0.01
+Iter = Int(parsed_args["opt3"])
 for iter in 1:30
   for datum = 1:N
     x_i = X[datum,:]
@@ -106,64 +92,5 @@ for iter in 1:30
     end
     label[datum] = k
   end
-  #rand_cur = randindex(rga,label)[1]
-  #println("After Iter $iter, the ARI is $rand_cur with $K clusters")
-  println("After Iter $iter, $K clusters")
-  #iter = iter + 1
-  #rand_dif = rand_cur - rand_prev
-  #rand_prev = rand_cur
-  #writedlm("DP_clustering_c10K_test.csv", label, ",")
 end
-
-'''
-# for all clusters estimated by the algorithm
-for ind in unique(label)
-  println("Observed cluster: $ind")
-  temp = find(label.==ind)
-  println("Contigs in observer cluster $ind: ", length(temp))
-  println("--------------------------------")
-  # find the number of estimated clusters in the original clusters
-  t = unique(rga[temp])
-  temp_cum = 0
-  for j in t
-    temp_in = length(find(rga[temp].==j))
-    println("True cluster $j ","|",temp_in)
-    temp_cum += temp_in
-  end
-  println("\n")
-end
-'''
-label = readtable("DP_clustering_c10K_test.csv",header = false)
-label = label[:,1]
-# Find 'pure' and 'dirty clusters'
-for ind in unique(rga)
-  println("True cluster: $ind")
-  temp = find(rga.==ind)
-  println("Contigs in true cluster $ind: ", length(temp))
-  println("--------------------------------")
-  # find the number of estimated clusters in the original clusters
-  t = unique(label[temp])
-  temp_cum = 0
-  for j in t
-    temp_in = length(find(label[temp].==j))
-    println("Observed cluster $j ","|",temp_in)
-    temp_cum += temp_in
-  end
-  println("\n")
-end
-
-
-cl_graph = loadgraphs("Graph_fin_extra_links_test.xml.gz",GraphMLFormat())
-cl_graph = cl_graph["G"]
-
-t = length(find(rga.==17))
-temp = zeros(Int64,(t,2))
-ind = 1
-for v in vertices(cl_graph)
-  k = rga[v]
-  if k == 17
-    temp[ind,1] = length(out_neighbors(cl_graph,v))
-    ind += 1
-  end
-end
-print(counts(temp))
+writedlm("DP_clustering_c10K_test.csv", label, ",")

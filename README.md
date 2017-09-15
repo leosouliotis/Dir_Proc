@@ -1,4 +1,5 @@
 # Dir_Proc
+<<<<<<< Updated upstream
 Dirichlet process collapsed Gibbs for infinite Gaussian mixtures
 
 # Dependencies and prerequisites
@@ -23,3 +24,10 @@ The prerequisite packages can be downloaded the following way:
  
  
 # Infinite Gaussian
+=======
+Dirichlet process collapsed Gibbs for Normal Mixtures
+
+# Infinite Gaussian mixtures
+
+$ \sum_{\forall i}{x_i^{2}} $
+>>>>>>> Stashed changes
