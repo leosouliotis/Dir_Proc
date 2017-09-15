@@ -1,5 +1,5 @@
 # Dir_Proc
-Dirichlet process collapsed Gibbs for Normal Mixtures
+Dirichlet process collapsed Gibbs for infinite Gaussian mixtures
 
 # Dependencies and prerequisites
 * Julia Lang (v>0.6) with the following packages installed
