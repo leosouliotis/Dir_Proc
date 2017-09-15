@@ -1,5 +1,4 @@
 # Dir_Proc
-<<<<<<< Updated upstream
 Dirichlet process collapsed Gibbs for infinite Gaussian mixtures
 
 # Dependencies and prerequisites
@@ -20,14 +19,21 @@ The prerequisite packages can be downloaded the following way:
    Pkg.add("Clustering")
    Pkg.add("ArgParse")
    ```
- 
- 
- 
-# Infinite Gaussian
-=======
-Dirichlet process collapsed Gibbs for Normal Mixtures
 
 # Infinite Gaussian mixtures
 
-$ \sum_{\forall i}{x_i^{2}} $
->>>>>>> Stashed changes
+The prior mean vector **μ0** and the prior covariance matrix **Λ0** have been set to a d dimensional **0** vector and a diagonal matrix with entries 1/(d * w), where w is the diagonal elements of the covariance matrix of the data, where d is the dimension of the data set.
+*User is free to change these values in the script*.
+
+ The parameter α that control the assignment of the data in a new cluster is set to 1. More information about DP can be found [here](https://www.stats.ox.ac.uk/~teh/research/npbayes/Teh2010a.pdf).
+ 
+ # Instructions
+ 
+ The DP clustering can be performed as
+
+`julia DP_CS.jl -d Dataset -i No_of_iterations -k Initial_number_of_clusters`
+
+where
+  * -d : Dataset of interest (N x d)
+  * -i : Number of iteration for the Gibbs sampler
+  * -k : Initial number of clusters
