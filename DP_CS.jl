@@ -50,8 +50,6 @@ X = Matrix(data)
 # Initialization
 K = Int(parsed_args["opt2"])
 label = kmeans(transpose(X),K,maxiter=1000, tol=0.00001).assignments
-println("Initial ARI:")
-println(randindex(rga,label)[1])
 nk = counts(label);
 prob = zeros(Float64,K+1);
 println("Gibbs sampler initialized and  starting...")
@@ -93,3 +91,4 @@ for iter in 1:30
   end
 end
 writedlm("DP_clustering_c10K_test.csv", label, ",")
+println("Gibbs Sampler has finished, predicting $K clusters")
