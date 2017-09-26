@@ -25,7 +25,6 @@ end
 # Import and sort coverage dataset
 parsed_args = parse_commandline()
 data = readtable(parsed_args["opt1"],header = true)
-data = sort(data,cols=:contig_id)
 N,d = size(data)
 println("Data imported")
 
