@@ -40,3 +40,8 @@ where
   * -k : Initial number of clusters
 
 The results of the clustering are saved in a .csv file named DP_clustering.csv
+
+# Example
+
+We simulated a 5 dimensional dataset consisting of 4 clusters. Each cluster has a different mean vector and the same covariance matrix.
+(sample_data.pdf)
