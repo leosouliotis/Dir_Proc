@@ -47,4 +47,16 @@ We simulated a 5 dimensional dataset consisting of 4 clusters. Each cluster has 
 
 ``julia DP_CS.jl -d Sample_data.csv -i 15 -k 10``
 
-sarting with 10 clusters for 15 iterations.
+starting with 10 clusters for 15 iterations.
+
+In order to validate our clustering, knowing the true cluster allocation of the observations, we use the following script which calculates the Rand Index between the true cluster allocation and the allocation under the DP model
+
+`using DataFrame
+using Clustering
+
+rca = readtable("sample_rca.csv",header= false)
+dpca = readtable("DP_clustering.csv",header= false)
+
+randindex(Array(rca),Array(dpca))[1]
+`
+The Rand Index is equal to 1, which results that the clustering under the DP model is perfect
