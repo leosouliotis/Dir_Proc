@@ -53,10 +53,8 @@ In order to validate our clustering, knowing the true cluster allocation of the 
 
 ``using DataFrame
 using Clustering
-
 rca = readtable("sample_rca.csv",header= false)
 dpca = readtable("DP_clustering.csv",header= false)
+randindex(Array(rca),Array(dpca))[1]``
 
-randindex(Array(rca),Array(dpca))[1]
-``
 The Rand Index is equal to 1, which results that the clustering under the DP model is perfect
