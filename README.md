@@ -43,5 +43,8 @@ The results of the clustering are saved in a .csv file named DP_clustering.csv
 
 # Example
 
-We simulated a 5 dimensional dataset consisting of 4 clusters. Each cluster has a different mean vector and the same covariance matrix.
-(sample_data.pdf)
+We simulated a 5 dimensional dataset consisting of 4 clusters. Each cluster has a different mean vector and the same covariance matrix. After downloading the data and the true cluster allocation, you can run the DP Gibbs Sampler as
+
+``julia DP_CS.jl -d Sample_data.csv -i 15 -k 10``
+
+sarting with 10 clusters for 15 iterations.
