@@ -51,12 +51,12 @@ starting with 10 clusters for 15 iterations.
 
 In order to validate our clustering, knowing the true cluster allocation of the observations, we use the following script which calculates the Rand Index between the true cluster allocation and the allocation under the DP model
 
-`using DataFrame
+``using DataFrame
 using Clustering
 
 rca = readtable("sample_rca.csv",header= false)
 dpca = readtable("DP_clustering.csv",header= false)
 
 randindex(Array(rca),Array(dpca))[1]
-`
+``
 The Rand Index is equal to 1, which results that the clustering under the DP model is perfect
