@@ -90,5 +90,5 @@ for iter in 1:30
     label[datum] = k
   end
 end
-writedlm("DP_clustering_c10K_test.csv", label, ",")
+writedlm("DP_clustering_c10K.csv", label, ",")
 println("Gibbs Sampler has finished, predicting $K clusters")
